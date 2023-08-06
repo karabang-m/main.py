@@ -19,7 +19,11 @@ letters = string.ascii_lowercase
 options = FirefoxOptions();driver=webdriver.Firefox();a=ActionChains(driver);
 driver.get('https://mail.tm/en/')
 time.sleep(5)
-driver.find_element(By.XPATH, '//*[@id="accounts-menu"]').click()
+wait = WebDriverWait(driver, 10)  # Adjust the timeout as needed
+accounts_menu = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="accounts-menu"]')))
+
+# Click the element
+accounts_menu.click()
 time.sleep(5)
 email = driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[2]/div/div/div[2]/div[4]/div[3]/div/div[1]/p[2]').text
 print(email)
